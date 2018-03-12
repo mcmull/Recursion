@@ -45,3 +45,19 @@ change amt = histo go (expand amt) where
 lookup' :: Attr Nat a -> Int -> a
 lookup' cache 0 = attribute cache
 lookup' cache n = lookup' inner (n-1) where (Next inner) = hole cache
+
+
+-- another pattern functor to illustrate how catamorphism is a generalization of foldl
+data List' b a = Nil' | Cons' b a
+
+instance Functor (List' b) where
+  fmap _ Nil' = Nil'
+  fmap f (Cons' b x) = Cons' b (f x)
+
+algebraList :: List' String String -> String
+algebraList Nil' = ""
+algebraList (Cons' b x) = b ++ x
+
+listToFix :: [a] -> Fix (List' a)
+listToFix [] = Fx Nil'
+listToFix (x : xs) = Fx (Cons' x (listToFix xs))
