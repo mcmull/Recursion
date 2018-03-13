@@ -54,9 +54,13 @@ instance Functor (List' b) where
   fmap _ Nil' = Nil'
   fmap f (Cons' b x) = Cons' b (f x)
 
-algebraList :: List' String String -> String
-algebraList Nil' = ""
-algebraList (Cons' b x) = b ++ x
+algebraForStrings :: List' String String -> String
+algebraForStrings Nil' = ""
+algebraForStrings (Cons' b x) = b ++ x
+
+algebraForInts :: List' Int Int -> Int
+algebraForInts Nil' = 0
+algebraForInts (Cons' b x) = b + x
 
 listToFix :: [a] -> Fix (List' a)
 listToFix [] = Fx Nil'

@@ -47,15 +47,15 @@ alg' = undefined
 unFix :: Fix f -> f (Fix f)
 unFix (Fx x) = x
 
-data ListF a b = Nil | Cons a b
-
-instance Functor (ListF a) where
-  fmap _ Nil = Nil
-  fmap f (Cons x y) = Cons x $ f y
-
-algSum :: Algebra (ListF Int) Int
-algSum Nil = 0
-algSum (Cons x y) = x + y
+-- data ListF a b = Nil | Cons a b
+--
+-- instance Functor (ListF a) where
+--   fmap _ Nil = Nil
+--   fmap f (Cons x y) = Cons x $ f y
+--
+-- algSum :: Algebra (ListF Int) Int
+-- algSum Nil = 0
+-- algSum (Cons x y) = x + y
 
 type Coalgebra f a = a -> f a
 
